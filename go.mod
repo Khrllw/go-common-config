@@ -1,4 +1,4 @@
-module github.com/khrllw/Go_Common_config
+module github.com/Khrllw/Go_Common_config
 
 go 1.24.4
 
