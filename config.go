@@ -81,7 +81,11 @@ type DatabaseConfig struct {
 
 // LoggerConfig содержит настройки логирования.
 type LoggerConfig struct {
-	Level string
+	Enable     bool
+	LogsDir    string
+	Level      string
+	Format     string
+	SavingDays int
 }
 
 // SwaggerConfig содержит настройки Swagger UI.
@@ -138,7 +142,11 @@ func LoadConfig() (*Config, error) {
 			ConnMaxLifetime: getEnvAsDuration("DB_CONN_MAX_LIFETIME", defaultDBConnMaxLifetime),
 		},
 		Logger: LoggerConfig{
-			Level: getEnv("LOG_LEVEL", defaultLogLevel),
+			Enable:     getEnvAsBool("LOGGER_ENABLE", true),
+			LogsDir:    getEnv("LOGGER_LOGS_DIR", "./logs"),
+			Level:      getEnv("LOGGER_LOG_LEVEL", "DEBUG"),
+			Format:     getEnv("LOGGER_LOG_FORMAT", "LOG"),
+			SavingDays: getEnvAsInt("LOGGER_SAVING_DAYS", 5),
 		},
 		Swagger: SwaggerConfig{
 			Enabled: getEnvAsBool("SWAGGER_ENABLED", defaultSwaggerEnable),
